@@ -1,10 +1,115 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Benim Sitem</title>
+<meta charset="UTF-8">
+<title>Soru Oyunu</title>
+
+<style>
+@font-face {
+  font-family: "Arap";
+  src: url("ALHAMBRA.ttf") format("truetype");
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: #c2b280;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Arap", sans-serif;
+}
+
+#kutu {
+  background: white;
+  padding: 30px;
+  width: 320px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+#soru {
+  font-size: 22px;
+  margin-bottom: 25px;
+}
+
+button {
+  font-size: 18px;
+  padding: 12px 26px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+#evet {
+  background: pink;
+}
+
+#hayir {
+  background: #7b4a2e;
+  color: white;
+  position: absolute;
+}
+</style>
 </head>
+
 <body>
-  <h1>Site çalışıyor 🎉</h1>
+
+<div id="kutu">
+  <div id="soru"></div>
+  <button id="evet">Evet</button>
+  <button id="hayir">Hayır</button>
+</div>
+
+<script>
+const sorular = [
+  "Beni seviyor musun?",
+  "Benimle vakit geçirmeyi seviyor musun?",
+  "Beni düşündüğünde mutlu oluyor musun?",
+  "Ben senin için özel miyim?",
+  "Benimle geleceği hayal eder misin?",
+  "O zaman benimle çıkar mısın?"
+];
+
+let index = 0;
+let kac = 0;
+
+const soru = document.getElementById("soru");
+const evet = document.getElementById("evet");
+const hayir = document.getElementById("hayir");
+
+soru.innerText = sorular[index];
+
+function sonraki() {
+  index++;
+  kac = 0;
+
+  if (index < sorular.length) {
+    soru.innerText = sorular[index];
+  } else {
+    soru.innerText = "Bitti ❤️";
+    evet.style.display = "none";
+    hayir.style.display = "none";
+  }
+}
+
+evet.onclick = () => {
+  sonraki();
+};
+
+hayir.onmouseover = () => {
+  if (kac < 3) {
+    hayir.style.left = Math.random() * 220 + "px";
+    hayir.style.top  = Math.random() * 140 + "px";
+    kac++;
+  }
+};
+
+hayir.onclick = () => {
+  sonraki();
+};
+</script>
+
 </body>
 </html>
